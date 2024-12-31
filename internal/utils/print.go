@@ -15,3 +15,7 @@ func PrintlnColorful(color string, text string) {
 	var Reset = "\033[0m"
 	fmt.Println(color + text + Reset)
 }
+
+func PrintDivider() {
+	PrintlnColorful(Cyan, "======================")
+}

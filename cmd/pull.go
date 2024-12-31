@@ -33,6 +33,6 @@ func pullAllProjects() {
 		utils.PrintlnColorful(utils.Magenta, fmt.Sprintf("Pulling: %s", project))
 		utils.ExecuteCmd("git", "-C", projectDir, "pull")
 
-		utils.PrintlnColorful(utils.Cyan, "======================")
+		utils.PrintDivider()
 	}
 }
