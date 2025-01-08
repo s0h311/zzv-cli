@@ -16,6 +16,14 @@ func PrintlnColorful(color string, text string) {
 	fmt.Println(color + text + Reset)
 }
 
+func SprintfColorful(color string, text string, vars ...any) string {
+	return fmt.Sprintf(color+text, vars...)
+}
+
 func PrintDivider() {
 	PrintlnColorful(Cyan, "======================")
+}
+
+func GetDivider() string {
+	return SprintfColorful(Cyan, "======================")
 }

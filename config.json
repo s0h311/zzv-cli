@@ -1,0 +1,90 @@
+{
+  "baseDirEnv": "ZZV_PROJECT_DIR",
+  "projects": [
+    {
+      "name": "zzv-frontend",
+      "short": "fe",
+      "path": "$ZZV_PROJECT_DIR/zzv-frontend",
+      "type": "node",
+      "env": "host",
+      "buildCmds": [
+        "npm ci",
+        "npm run build:desktop:development",
+        "npm run build:mobile:development"
+      ],
+      "isMainProject": true
+    },
+    {
+      "name": "zzv-desktop-check24-node",
+      "short": "d:fe",
+      "path": "$ZZV_PROJECT_DIR/zzv-desktop-check24/www/frontend",
+      "type": "node",
+      "env": "host",
+      "buildCmds": ["npm ci", "npm run build:prod"],
+      "isMainProject": false
+    },
+    {
+      "name": "zzv-desktop-check24-php",
+      "short": "d",
+      "path": "/home/zzv-desktop-check24/current/www",
+      "type": "php",
+      "env": "docker",
+      "buildCmds": ["composer i"],
+      "isMainProject": false
+    },
+    {
+      "name": "zzv-mobile-check24-node",
+      "short": "m:fe",
+      "path": "$ZZV_PROJECT_DIR/zzv-mobile-check24/www/frontend",
+      "type": "node",
+      "env": "host",
+      "buildCmds": ["npm ci", "npm run build:prod"],
+      "isMainProject": false
+    },
+    {
+      "name": "zzv-mobile-check24-php",
+      "short": "m",
+      "path": "/home/zzv-mobile-check24/current/www",
+      "type": "php",
+      "env": "docker",
+      "buildCmds": ["composer i"],
+      "isMainProject": false
+    },
+    {
+      "name": "zzv-core",
+      "short": "core",
+      "path": "/home/zzv-core/current/www",
+      "type": "php",
+      "env": "docker",
+      "buildCmds": ["composer i --ignore-platform-reqs"],
+      "isMainProject": true
+    },
+    {
+      "name": "zzv-api",
+      "short": "api",
+      "path": "/home/zzv-api/current/www",
+      "type": "php",
+      "env": "docker",
+      "buildCmds": ["composer i"],
+      "isMainProject": true
+    },
+    {
+      "name": "zzv-app-check24",
+      "short": "app",
+      "path": "/home/zzv-app-check24/current/www",
+      "type": "php",
+      "env": "docker",
+      "buildCmds": ["composer i"],
+      "isMainProject": false
+    },
+    {
+      "name": "zzv-end2end",
+      "short": "e2e",
+      "path": "/home/vendor/zzv-end2end",
+      "type": "php",
+      "env": "docker",
+      "buildCmds": ["composer i"],
+      "isMainProject": false
+    }
+  ]
+}
