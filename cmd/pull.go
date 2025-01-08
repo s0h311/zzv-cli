@@ -64,10 +64,10 @@ func pullProjectProcess(project string, projectDir string, ch chan<- string, wg 
 	defer wg.Done()
 
 	ch <- utils.SprintfColorful(utils.Magenta, "%s: Switching to main branch", strings.ToUpper(project))
-	utils.ExecuteCmd("git", "-C", projectDir, "switch", "main")
+	ch <- utils.ExecuteCmd("git", "-C", projectDir, "switch", "main")
 
 	ch <- utils.SprintfColorful(utils.Magenta, "%s: Pulling", strings.ToUpper(project))
-	utils.ExecuteCmd("git", "-C", projectDir, "pull")
+	ch <- utils.ExecuteCmd("git", "-C", projectDir, "pull")
 
 	ch <- utils.GetDivider()
 }

@@ -5,37 +5,42 @@ import (
 	"os/exec"
 )
 
-func ExecuteCmd(cmdName string, args ...string) {
+func ExecuteCmd(cmdName string, args ...string) string {
 	cmd := exec.Command(cmdName, args...)
+
+	fmt.Println(cmd)
 
 	stdout, err := cmd.Output()
 
 	if err != nil {
-		fmt.Println(err.Error())
-		return
+		return err.Error()
 	}
 
-	fmt.Println(string(stdout))
+	return string(stdout)
 }
 
-func ExecuteNpmCmd(workingDir string, args ...string) {
+func ExecuteNpmCmd(workingDir string, args ...string) string {
 	arguments := []string{
-		"npm",
 		"--prefix",
 		workingDir,
+		"-y",
 	}
 
-	arguments = append(arguments, args...)
+	arguments = append(args, arguments...)
+
+	return ExecuteCmd("npm", arguments...)
 }
 
-func ExecuteCmdInDocker(workingDir string, args ...string) {
+func ExecuteCmdInDocker(workingDir string, containerName string, args ...string) string {
 	arguments := []string{
+		"docker",
 		"exec",
 		"-w",
 		workingDir,
+		containerName,
 	}
 
 	arguments = append(arguments, args...)
 
-	ExecuteCmd("docker", arguments...)
+	return ExecuteCmd("sudo", arguments...)
 }

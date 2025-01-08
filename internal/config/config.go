@@ -20,8 +20,9 @@ type Project struct {
 }
 
 type Config struct {
-	BaseDirEnv string    `json:"baseDirEnv"`
-	Projects   []Project `json:"projects"`
+	BaseDirEnv          string    `json:"baseDirEnv"`
+	DockerContainerName string    `json:"dockerContainerName"`
+	Projects            []Project `json:"projects"`
 }
 
 func getConfig() *Config {
@@ -73,4 +74,8 @@ func GetProjects() []Project {
 	}
 
 	return projects
+}
+
+func GetDockerContainerName() string {
+	return getConfig().DockerContainerName
 }

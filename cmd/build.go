@@ -23,7 +23,7 @@ func GetBuildCmd() *cobra.Command {
 				projects = config.GetAllProjects()
 			}
 
-			buildProjects(projects)
+			buildProjects(projects, config.GetDockerContainerName())
 		},
 	}
 
@@ -32,16 +32,14 @@ func GetBuildCmd() *cobra.Command {
 	return cmd
 }
 
-func buildProjects(projects []config.Project) {
-	fmt.Println(projects)
-
+func buildProjects(projects []config.Project, dockerContainerName string) {
 	ch := make(chan string)
 	var wg sync.WaitGroup
 
 	for _, project := range projects {
 		wg.Add(1)
 
-		go buildProjectProcess(project, ch, &wg)
+		go buildProjectProcess(project, dockerContainerName, ch, &wg)
 	}
 
 	go func() {
@@ -54,19 +52,19 @@ func buildProjects(projects []config.Project) {
 	}
 }
 
-func buildProjectProcess(project config.Project, ch chan<- string, wg *sync.WaitGroup) {
+func buildProjectProcess(project config.Project, dockerContainerName string, ch chan<- string, wg *sync.WaitGroup) {
 	defer wg.Done()
 
 	for _, buildCmd := range project.BuildCmds {
 		ch <- utils.SprintfColorful(utils.Magenta, "%s: Building", strings.ToUpper(project.Name))
 
 		if project.Type == "php" {
-			utils.ExecuteCmdInDocker(project.Path, buildCmd)
+			ch <- utils.ExecuteCmdInDocker(project.Path, dockerContainerName, buildCmd)
 			continue
 		}
 
 		if project.Type == "node" {
-			utils.ExecuteNpmCmd(project.Path, buildCmd)
+			ch <- utils.ExecuteNpmCmd(project.Path, buildCmd)
 		}
 
 		ch <- utils.GetDivider()
