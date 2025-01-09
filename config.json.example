@@ -54,7 +54,7 @@
     {
       "name": "zzv-core",
       "short": "core",
-      "path": "/home/zzv-core/current/www",
+      "pathInDocker": "/home/zzv-core/current/www",
       "type": "php",
       "env": "docker",
       "buildCmds": ["composer i --ignore-platform-reqs"],
@@ -63,7 +63,7 @@
     {
       "name": "zzv-api",
       "short": "api",
-      "path": "/home/zzv-api/current/www",
+      "pathInDocker": "/home/zzv-api/current/www",
       "type": "php",
       "env": "docker",
       "buildCmds": ["composer i"],
@@ -72,7 +72,7 @@
     {
       "name": "zzv-app-check24",
       "short": "app",
-      "path": "/home/zzv-app-check24/current/www",
+      "pathInDocker": "/home/zzv-app-check24/current/www",
       "type": "php",
       "env": "docker",
       "buildCmds": ["composer i"],
@@ -81,7 +81,7 @@
     {
       "name": "zzv-end2end",
       "short": "e2e",
-      "path": "/home/vendor/zzv-end2end",
+      "pathInDocker": "/home/vendor/zzv-end2end",
       "type": "php",
       "env": "docker",
       "buildCmds": ["composer i"],

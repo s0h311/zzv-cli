@@ -17,14 +17,10 @@ func GetPullCmd() *cobra.Command {
 		Use:   "pull",
 		Short: "Pull all projects",
 		Run: func(cmd *cobra.Command, args []string) {
-			projects := []string{
-				"zzv-core",
-				"zzv-api",
-				"zzv-frontend",
-			}
+			projects := config.GetProjects()
 
 			if pullAll {
-				projects = append(projects, "zzv-app-check24", "zzv-desktop-check24", "zzv-mobile-check24", "vendor/zzv-end2end")
+				projects = config.GetAllProjects()
 			}
 
 			pullProjects(projects)
@@ -36,18 +32,14 @@ func GetPullCmd() *cobra.Command {
 	return pullCmd
 }
 
-func pullProjects(projects []string) {
-	baseDir := config.GetBaseDir()
-
+func pullProjects(projects []config.Project) {
 	ch := make(chan string)
 	var wg sync.WaitGroup
 
 	for _, project := range projects {
-		projectDir := fmt.Sprintf("%s/%s", baseDir, project)
-
 		wg.Add(1)
 
-		go pullProjectProcess(project, projectDir, ch, &wg)
+		go pullProjectProcess(project.Name, project.Path, ch, &wg)
 	}
 
 	go func() {

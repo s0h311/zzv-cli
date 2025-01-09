@@ -13,6 +13,7 @@ type Project struct {
 	Name          string   `json:"name"`
 	Short         string   `json:"short"`
 	Path          string   `json:"path"`
+	PathInDocker  *string  `json:"pathInDocker"`
 	Type          string   `json:"type"`
 	Env           string   `json:"env"`
 	BuildCmds     []string `json:"buildCmds"`

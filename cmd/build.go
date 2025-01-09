@@ -59,7 +59,7 @@ func buildProjectProcess(project config.Project, dockerContainerName string, ch 
 		ch <- utils.SprintfColorful(utils.Magenta, "%s: Building", strings.ToUpper(project.Name))
 
 		if project.Type == "php" {
-			ch <- utils.ExecuteCmdInDocker(project.Path, dockerContainerName, buildCmd)
+			ch <- utils.ExecuteCmdInDocker(*project.PathInDocker, dockerContainerName, buildCmd)
 		}
 
 		if project.Type == "node" {
