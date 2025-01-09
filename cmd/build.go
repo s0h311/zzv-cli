@@ -60,7 +60,6 @@ func buildProjectProcess(project config.Project, dockerContainerName string, ch 
 
 		if project.Type == "php" {
 			ch <- utils.ExecuteCmdInDocker(project.Path, dockerContainerName, buildCmd)
-			continue
 		}
 
 		if project.Type == "node" {

@@ -1,14 +1,11 @@
 package utils
 
 import (
-	"fmt"
 	"os/exec"
 )
 
 func ExecuteCmd(cmdName string, args ...string) string {
 	cmd := exec.Command(cmdName, args...)
-
-	fmt.Println(cmd)
 
 	stdout, err := cmd.Output()
 
@@ -21,6 +18,8 @@ func ExecuteCmd(cmdName string, args ...string) string {
 
 func ExecuteNpmCmd(workingDir string, args ...string) string {
 	arguments := []string{
+		"-c",
+		"npm",
 		"--prefix",
 		workingDir,
 		"-y",
@@ -28,11 +27,12 @@ func ExecuteNpmCmd(workingDir string, args ...string) string {
 
 	arguments = append(args, arguments...)
 
-	return ExecuteCmd("npm", arguments...)
+	return ExecuteCmd("/bin/sh", arguments...)
 }
 
 func ExecuteCmdInDocker(workingDir string, containerName string, args ...string) string {
 	arguments := []string{
+		"-c",
 		"docker",
 		"exec",
 		"-w",
@@ -42,5 +42,5 @@ func ExecuteCmdInDocker(workingDir string, containerName string, args ...string)
 
 	arguments = append(arguments, args...)
 
-	return ExecuteCmd("sudo", arguments...)
+	return ExecuteCmd("/bin/sh", arguments...)
 }
