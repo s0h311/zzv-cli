@@ -9,9 +9,9 @@
       "type": "node",
       "env": "host",
       "buildCmds": [
-        "npm ci",
-        "npm run build:desktop:development",
-        "npm run build:mobile:development"
+        "ci",
+        "run build:desktop:development",
+        "run build:mobile:development"
       ],
       "isMainProject": true
     },

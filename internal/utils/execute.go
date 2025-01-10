@@ -18,8 +18,6 @@ func ExecuteCmd(cmdName string, args ...string) string {
 
 func ExecuteNpmCmd(workingDir string, args ...string) string {
 	arguments := []string{
-		"-c",
-		"npm",
 		"--prefix",
 		workingDir,
 		"-y",
@@ -27,7 +25,7 @@ func ExecuteNpmCmd(workingDir string, args ...string) string {
 
 	arguments = append(args, arguments...)
 
-	return ExecuteCmd("/bin/sh", arguments...)
+	return ExecuteCmd("npm", arguments...)
 }
 
 func ExecuteCmdInDocker(workingDir string, containerName string, args ...string) string {
