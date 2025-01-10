@@ -13,3 +13,21 @@ cp ./zzv.config.json ~/zzv.config.json
 sudo rm /usr/local/bin/zzv
 rm ~/zzv.config.json
 ```
+
+## Commands
+
+### Pull
+
+```bash
+zzv pull
+```
+
+> Use `-a, --all` to pull non-main projects
+
+### Build
+
+```bash
+zzv build
+```
+
+> Use `-a, --all` to build non-main projects

@@ -27,11 +27,18 @@ type Config struct {
 }
 
 func getConfig() *Config {
-	// GET PATH FROM ENV VARIABLE
-	configJson, err := os.Open("~/zzv.config.json")
+	homeDir, homeDirErr := os.UserHomeDir()
+
+	if homeDirErr != nil {
+		fmt.Println(homeDirErr)
+		os.Exit(1)
+	}
+
+	configJson, err := os.Open(fmt.Sprintf("%s/zzv.config.json", homeDir))
 
 	if err != nil {
 		fmt.Println(err)
+		os.Exit(1)
 	}
 
 	defer configJson.Close()

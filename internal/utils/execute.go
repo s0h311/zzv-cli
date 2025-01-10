@@ -1,15 +1,24 @@
 package utils
 
 import (
+	"fmt"
 	"os/exec"
+	"strings"
 )
 
 func ExecuteCmd(cmdName string, args ...string) string {
-	cmd := exec.Command(cmdName, args...)
+	normalizedArgs := []string{}
+
+	for _, arg := range args {
+		normalizedArgs = append(normalizedArgs, strings.Split(arg, " ")...)
+	}
+
+	cmd := exec.Command(cmdName, normalizedArgs...)
 
 	stdout, err := cmd.Output()
 
 	if err != nil {
+		fmt.Println(string(stdout))
 		return err.Error()
 	}
 
