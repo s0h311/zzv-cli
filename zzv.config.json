@@ -55,5 +55,14 @@
       "buildCmds": ["composer i"],
       "isMainProject": false
     }
+  ],
+  "additionalCmds": [
+    {
+      "name": "migrate",
+      "pathInDocker": "/home/zzv-core/current/www",
+      "type": "php",
+      "env": "docker",
+      "cmds": ["composer migrations-migrate-all"]
+    }
   ]
 }

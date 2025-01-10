@@ -20,10 +20,19 @@ type Project struct {
 	IsMainProject bool     `json:"isMainProject"`
 }
 
+type AdditionalCmd struct {
+	Name         string   `json:"name"`
+	PathInDocker *string  `json:"pathInDocker"`
+	Type         string   `json:"type"`
+	Env          string   `json:"env"`
+	Cmds         []string `json:"cmds"`
+}
+
 type Config struct {
-	BaseDirEnv          string    `json:"baseDirEnv"`
-	DockerContainerName string    `json:"dockerContainerName"`
-	Projects            []Project `json:"projects"`
+	BaseDirEnv          string          `json:"baseDirEnv"`
+	DockerContainerName string          `json:"dockerContainerName"`
+	Projects            []Project       `json:"projects"`
+	AdditionalCmds      []AdditionalCmd `json:"additionalCmds"`
 }
 
 func getConfig() *Config {
@@ -86,4 +95,14 @@ func GetProjects() []Project {
 
 func GetDockerContainerName() string {
 	return getConfig().DockerContainerName
+}
+
+func GetMigrationCmd() AdditionalCmd {
+	for _, cmd := range getConfig().AdditionalCmds {
+		if cmd.Name == "migrate" {
+			return cmd
+		}
+	}
+
+	panic("Cannot find migrate command")
 }
