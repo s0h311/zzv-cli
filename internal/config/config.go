@@ -106,3 +106,13 @@ func GetMigrationCmd() AdditionalCmd {
 
 	panic("Cannot find migrate command")
 }
+
+func GetStreetcodeCmd() AdditionalCmd {
+	for _, cmd := range getConfig().AdditionalCmds {
+		if cmd.Name == "streetcode" {
+			return cmd
+		}
+	}
+
+	panic("Cannot find streetcode command")
+}

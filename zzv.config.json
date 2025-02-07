@@ -63,6 +63,13 @@
       "type": "php",
       "env": "docker",
       "cmds": ["composer migrations-migrate-all"]
+    },
+    {
+      "name": "streetcode",
+      "pathInDocker": "/home/zzv-core/current/scripts/provisioning",
+      "type": "shell",
+      "env": "docker",
+      "cmds": ["/bin/bash setup.streetcode.sh"]
     }
   ]
 }

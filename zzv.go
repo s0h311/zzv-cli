@@ -18,6 +18,7 @@ func main() {
 	rootCmd.AddCommand(cmd.GetPullCmd())
 	rootCmd.AddCommand(cmd.GetBuildCmd())
 	rootCmd.AddCommand(cmd.GetMigrateCmd())
+	rootCmd.AddCommand(cmd.GetStreetcodeCmd())
 
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Fprintf(os.Stderr, "Oops, error: '%s'\n", err)
